@@ -16,10 +16,10 @@ public class IndexerMain {
         InvertedIndexStorer invertedIndexStorer = new StoreInvertedIndex();
 
         scheduler.scheduleAtFixedRate(() -> {
-            invertedIndexStorer.storeInvertedIndexJson(invertedIndexBuilder.builtInvertedIndexJson(datalakePath),jsonDatamartPath);
+            invertedIndexStorer.storeInvertedIndexJson(invertedIndexBuilder.buildInvertedIndex(datalakePath),jsonDatamartPath);
             System.out.println("Los nuevos libros se han indexado correctamente en el JSON DATAMART");
 
-            invertedIndexStorer.storeInvertedIndexMongo(invertedIndexBuilder.builtInvertedIndexMongo(datalakePath));
+            invertedIndexStorer.storeInvertedIndexMongo(invertedIndexBuilder.buildInvertedIndex(datalakePath));
             System.out.println("Los nuevos libros se han indexado correctamente en el Mongo DATAMART");
         }, 0, 25, TimeUnit.SECONDS); // Ejecuta cada 20 segundos
 
